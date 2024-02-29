@@ -1,3 +1,6 @@
+//Función para detectar la voz y escribir la información
+
+
 document.getElementById('startRecordingBtn').addEventListener('click', function() {
     startRecording();
 });
