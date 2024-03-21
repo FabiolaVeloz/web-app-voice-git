@@ -1,6 +1,4 @@
 //Función para detectar la voz y escribir la información
-
-
 document.getElementById('startRecordingBtn').addEventListener('click', function() {
     startRecording();
 });
@@ -13,13 +11,23 @@ function startRecording() {
     document.getElementById('startRecordingBtn').classList.add('d-none');
     document.getElementById('stopRecordingBtn').classList.remove('d-none');
 
-    var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
     recognition.lang = 'es-ES';
     
     recognition.onresult = function(event) {
-        var transcript = event.results[0][0].transcript;
+        // Trae la información de todo lo que estuve hablando
+        const transcript = event.results[0][0].transcript;
+        const keyword='fabiola';
         document.getElementById('resultado').innerText = "Orden identificada: " + transcript;
+
+        // Verificar si la palabra 'pollito' está en el resultado
+        if (transcript.toLowerCase().includes(keyword)) {
+            console.log("Palabra encontrada");
+        }
     };
+
+    recognition.onerror = function(event){
+    }
     
     recognition.start();
 }
