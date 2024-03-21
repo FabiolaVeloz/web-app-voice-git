@@ -1,4 +1,9 @@
 //Función para detectar la voz y escribir la información
+
+//Trae el id del texto a cambiar
+const controlTexto= document.getElementById('controlTexto');
+controlTexto.classList.add('fs-6');
+
 document.getElementById('startRecordingBtn').addEventListener('click', function() {
     startRecording();
 });
@@ -17,11 +22,13 @@ function startRecording() {
     recognition.onresult = function(event) {
         // Trae la información de todo lo que estuve hablando
         const transcript = event.results[0][0].transcript;
-        const keyword='fabiola';
+        const keyword='tamaño 1';
         document.getElementById('resultado').innerText = "Orden identificada: " + transcript;
 
         // Verificar si la palabra 'pollito' está en el resultado
         if (transcript.toLowerCase().includes(keyword)) {
+            //Cambia el tamaño del texto
+            controlTexto.classList.add('fs-1');
             console.log("Palabra encontrada");
         }
     };
