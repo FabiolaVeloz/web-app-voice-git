@@ -9,25 +9,37 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Identificación de Orden por Voz con JS</a>
+  <a class="navbar-brand mx-auto" href="#">Identificación de Orden por Voz con JS</a>
 </nav>
 
 <div class="container mt-5">
-  <span class="fw-bold fst-italic" id="controlTexto">Control de Texto</span>
-</div>
-
-
-<div class="container mt-5">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6">
       <button id="startRecordingBtn" class="btn btn-primary">Empezar a Grabar</button>
       <button id="stopRecordingBtn" class="btn btn-danger d-none">Detener Grabación</button>
       <div id="resultado" class="mt-3"></div>
     </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Instrucciones</h5>
+          <p class="card-text" style="text-align: justify;">Bienvenido al centro de comandos por voz del navegador, prueba diciendo los siguientes comandos cuando presiones el botón "Empezar a grabar":</p>
+          <ul>
+            <li>Abre una ventana nueva</li>
+            <li>Abre la página del tec</li>
+            <li>Cambia dimensiones de la ventana</li>
+            <li>Cierra esta ventana</li>
+            <li>Cierra el navegador</li>
+            <li>Muestra el historial de búsqueda</li>
+            <li>Muestra mi geolocalización</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<footer class="footer mt-auto py-3 bg-light">
+<footer class="footer mt-5 py-3 bg-light">
   <div class="container">
     <span class="text-muted">Todos los derechos reservados. Fabiola Veloz © 2024 </span>
   </div>

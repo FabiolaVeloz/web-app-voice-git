@@ -1,8 +1,8 @@
 // Trae el id del texto a cambiar
 window.innerWidth = 800;
 window.innerHeight = 600;
-const controlTexto = document.getElementById('controlTexto');
-controlTexto.classList.add('fs-6');
+
+
 
 document.getElementById('startRecordingBtn').addEventListener('click', function () {
     startRecording();
@@ -22,23 +22,19 @@ function startRecording() {
     recognition.onresult = function (event) {
         // Trae la información de todo lo que estuve hablando
         const transcript = event.results[0][0].transcript;
-        document.getElementById('resultado').innerText = "Orden identificada: " + transcript;
+        document.getElementById('resultado').innerText = "Orden Identificada: " + transcript;
 
         // Verificar diferentes instrucciones reconocidas por voz usando switch
         switch(true) {
-            case transcript.toLowerCase().includes('cambia a tamaño 1'):
-                // Cambia el tamaño del texto a 1
-                controlTexto.classList.add('fs-1');
-                break;
-            case transcript.toLowerCase().includes('abrir una ventana nueva'):
+            case transcript.toLowerCase().includes('abre una ventana nueva'):
                 // Abre una nueva pestaña
                 window.open('about:blank', '_blank');
                 break;
-            case transcript.toLowerCase().includes('abre página del tec'):
+            case transcript.toLowerCase().includes('abre la página del tec'):
                 // Abre la página del tec en una nueva ventana
                 window.open('https://itp.itpachuca.edu.mx/', '_blank');
                 break;
-            case transcript.toLowerCase().includes('cambia dimensiones'):
+            case transcript.toLowerCase().includes('cambia dimensiones de la ventana'):
                 // Obtener la URL actual
                 const urlActual = window.location.href;
                 // Abrir una nueva ventana con la misma URL y dimensiones deseadas
@@ -48,11 +44,11 @@ function startRecording() {
                 window.close();
                 }
                 break;    
-            case transcript.toLowerCase().includes('cerrar una ventana'):
+            case transcript.toLowerCase().includes('cierra esta ventana'):
                  window.open('', '_self', '');
                  window.close();
                  break
-            case transcript.toLowerCase().includes('cerrar el navegador'):
+            case transcript.toLowerCase().includes('cierra el navegador'):
                 // Cierra el navegador
                 var ventanas = window.open('', '_self', '');
                 while (ventanas !== null) {
@@ -60,6 +56,23 @@ function startRecording() {
                 ventanas = window.open('', '_self', '');
             }
             break;
+            case transcript.toLowerCase().includes('muestra historial en nueva ventana'):
+                // Muestra el historial en una nueva ventana
+                var historialVentana = window.open('', '_blank');
+                var historial = window.history;
+                for (var i = 0; i < historial.length; i++) {
+                historialVentana.document.write(historial[i] + '<br>');
+                }
+            break;
+            case transcript.toLowerCase().includes('muestra mi geolocalización'):
+                // Muestra la geolocalización en Google Maps
+                navigator.geolocation.getCurrentPosition(function(position) {
+                var latitud = position.coords.latitude;
+                var longitud = position.coords.longitude;
+                var urlGoogleMaps = 'https://www.google.com/maps?q=' + latitud + ',' + longitud;
+                window.open(urlGoogleMaps, '_blank');
+        });
+        break;
             default:
                 // Instrucción no reconocida
                 console.log('Instrucción no reconocida');
