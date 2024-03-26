@@ -49,21 +49,13 @@ function startRecording() {
                  window.close();
                  break
             case transcript.toLowerCase().includes('cierra el navegador'):
-                // Cierra el navegador
-                var ventanas = window.open('', '_self', '');
-                while (ventanas !== null) {
-                ventanas.close();
-                ventanas = window.open('', '_self', '');
-            }
-            break;
-            case transcript.toLowerCase().includes('muestra historial en nueva ventana'):
-                // Muestra el historial en una nueva ventana
-                var historialVentana = window.open('', '_blank');
-                var historial = window.history;
-                for (var i = 0; i < historial.length; i++) {
-                historialVentana.document.write(historial[i] + '<br>');
-                }
-            break;
+                    // Cierra todas las pestañas del navegador
+                    var ventanas = window.open('', '_self', '');
+                    while (ventanas !== null) {
+                        ventanas.close();
+                        ventanas = window.open('', '_self', '');
+                    }
+                    break;
             case transcript.toLowerCase().includes('muestra mi geolocalización'):
                 // Muestra la geolocalización en Google Maps
                 navigator.geolocation.getCurrentPosition(function(position) {
