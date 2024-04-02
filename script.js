@@ -1,20 +1,19 @@
-// Trae el id del texto a cambiar
 window.innerWidth = 800;
 window.innerHeight = 600;
 
-
-
-document.getElementById('startRecordingBtn').addEventListener('click', function () {
-    startRecording();
-});
-
-document.getElementById('stopRecordingBtn').addEventListener('click', function () {
-    stopRecording();
+document.getElementById('toggleRecordingBtn').addEventListener('click', function () {
+    if (document.getElementById('toggleRecordingBtn').innerText === "Empezar a Grabar") {
+        startRecording();
+    } else {
+        stopRecording();
+    }
 });
 
 function startRecording() {
-    document.getElementById('startRecordingBtn').classList.add('d-none');
-    document.getElementById('stopRecordingBtn').classList.remove('d-none');
+    document.getElementById('toggleRecordingBtn').innerText = "Detener Grabación";
+    document.getElementById('toggleRecordingBtn').classList.remove('btn-primary');
+    document.getElementById('toggleRecordingBtn').classList.add('btn-danger');
+    document.getElementById('resultado').innerText = ""; // Limpiar el texto de resultado
 
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
     recognition.lang = 'es-ES';
@@ -23,20 +22,24 @@ function startRecording() {
         // Trae la información de todo lo que estuve hablando
         const transcript = event.results[0][0].transcript;
         document.getElementById('resultado').innerText = "Orden Identificada: " + transcript;
+        stopRecording(); // Detener grabación después de identificar la orden
 
         // Verificar diferentes instrucciones reconocidas por voz usando switch
         switch(true) {
             case transcript.toLowerCase().includes('abre una ventana nueva'):
                 // Abre una nueva pestaña
+                enviarDatosAMockAPI('Abre una ventana nueva');
                 window.open('about:blank', '_blank');
                 break;
             case transcript.toLowerCase().includes('abre la página del tec'):
                 // Abre la página del tec en una nueva ventana
-                window.open('https://itp.itpachuca.edu.mx/', '_blank');
+                window.open('https://www.tecnm.mx/', '_blank');
+                enviarDatosAMockAPI('Abre la página del tec');
                 break;
             case transcript.toLowerCase().includes('cambia dimensiones de la ventana'):
                 // Obtener la URL actual
                 const urlActual = window.location.href;
+                enviarDatosAMockAPI('Cambia dimensiones de la ventana');
                 // Abrir una nueva ventana con la misma URL y dimensiones deseadas
                 const nuevaVentana = window.open(urlActual, '', 'width=800,height=600');
                 if (nuevaVentana) {
@@ -46,26 +49,33 @@ function startRecording() {
                 break;    
             case transcript.toLowerCase().includes('cierra esta ventana'):
                  window.open('', '_self', '');
+                 enviarDatosAMockAPI('Cierra esta ventana');
                  window.close();
                  break
-            case transcript.toLowerCase().includes('cierra el navegador'):
-                    // Cierra todas las pestañas del navegador
-                    var ventanas = window.open('', '_self', '');
-                    while (ventanas !== null) {
-                        ventanas.close();
-                        ventanas = window.open('', '_self', '');
-                    }
-                    break;
-            case transcript.toLowerCase().includes('muestra mi geolocalización'):
-                // Muestra la geolocalización en Google Maps
-                navigator.geolocation.getCurrentPosition(function(position) {
-                var latitud = position.coords.latitude;
-                var longitud = position.coords.longitude;
-                var urlGoogleMaps = 'https://www.google.com/maps?q=' + latitud + ',' + longitud;
-                window.open(urlGoogleMaps, '_blank');
-        });
+            case transcript.toLowerCase().includes('dime la hora actual'):
+                // Obtiene la hora actual
+                enviarDatosAMockAPI('Hora actual');
+                var fecha = new Date();
+                var hora = fecha.getHours();
+                var minutos = fecha.getMinutes();
+                // Convierte la hora en formato legible
+                var horaLegible = hora + ":" + (minutos < 10 ? '0' : '') + minutos;
+                // Utiliza la API de Text-to-Speech para decir la hora
+                var synth = window.speechSynthesis;
+                var utterance = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
+                synth.speak(utterance);
+                break;
+    case transcript.toLowerCase().includes('consultar clima'):
+        enviarDatosAMockAPI('Consultar clima');
+        var ciudad = prompt("Por favor, ingresa la ciudad para buscar el clima en Google:");
+        if (ciudad) {
+            var urlGoogleClima = 'https://www.google.com/search?q=clima+' + ciudad;
+            window.open(urlGoogleClima, '_blank');
+        } else {
+            alert("Debes ingresar una ciudad para buscar el clima.");
+        }
         break;
-            default:
+    default:
                 // Instrucción no reconocida
                 console.log('Instrucción no reconocida');
         }
@@ -79,6 +89,49 @@ function startRecording() {
 }
 
 function stopRecording() {
-    document.getElementById('startRecordingBtn').classList.remove('d-none');
-    document.getElementById('stopRecordingBtn').classList.add('d-none');
+    document.getElementById('toggleRecordingBtn').innerText = "Empezar a Grabar";
+    document.getElementById('toggleRecordingBtn').classList.remove('btn-danger');
+    document.getElementById('toggleRecordingBtn').classList.add('btn-primary');
+}
+
+function obtenerFechaHoraActual() {
+    return new Date().toLocaleString();
+}
+
+// Función para enviar datos a MockAPI
+function enviarDatosAMockAPI(instruccion) {
+    const fechaHoraActual = obtenerFechaHoraActual();
+
+    // Datos a enviar en la solicitud POST
+    const datos = {
+        instruccion: instruccion,
+        fechaHora: fechaHoraActual
+    };
+
+    // Opciones de la solicitud
+    const opciones = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+    };
+
+    // URL de MockAPI
+    const urlMockAPI = 'https://660c52433a0766e85dbdebe2.mockapi.io/comandos';
+
+    // Enviar la solicitud POST
+    fetch(urlMockAPI, opciones)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud POST a MockAPI');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Registro exitoso en MockAPI:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
