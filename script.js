@@ -1,28 +1,16 @@
 window.innerWidth = 800;
 window.innerHeight = 600;
 
-document.getElementById('toggleRecordingBtn').addEventListener('click', function () {
-    if (document.getElementById('toggleRecordingBtn').innerText === "Empezar a Grabar") {
-        startRecording();
-    } else {
-        stopRecording();
-    }
-});
+startRecording(); // Comienza la grabación inicialmente
 
 function startRecording() {
-    document.getElementById('toggleRecordingBtn').innerText = "Detener Grabación";
-    document.getElementById('toggleRecordingBtn').classList.remove('btn-primary');
-    document.getElementById('toggleRecordingBtn').classList.add('btn-danger');
-    document.getElementById('resultado').innerText = ""; // Limpiar el texto de resultado
-
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
     recognition.lang = 'es-ES';
-
+    const ordenIdentificadaDiv = document.getElementById('orden-identificada');
     recognition.onresult = function (event) {
         // Trae la información de todo lo que estuve hablando
         const transcript = event.results[0][0].transcript;
-        document.getElementById('resultado').innerText = "Orden Identificada: " + transcript;
-        stopRecording(); // Detener grabación después de identificar la orden
+        ordenIdentificadaDiv.innerText = "Orden Identificada: " + transcript;
 
         // Verificar diferentes instrucciones reconocidas por voz usando switch
         switch(true) {
@@ -43,15 +31,15 @@ function startRecording() {
                 // Abrir una nueva ventana con la misma URL y dimensiones deseadas
                 const nuevaVentana = window.open(urlActual, '', 'width=800,height=600');
                 if (nuevaVentana) {
-                // Cerrar la ventana actual
-                window.close();
+                    // Cerrar la ventana actual
+                    window.close();
                 }
                 break;    
             case transcript.toLowerCase().includes('cierra esta ventana'):
-                 window.open('', '_self', '');
-                 enviarDatosAMockAPI('Cierra esta ventana');
-                 window.close();
-                 break
+                window.open('', '_self', '');
+                enviarDatosAMockAPI('Cierra esta ventana');
+                window.close();
+                break;
             case transcript.toLowerCase().includes('dime la hora actual'):
                 // Obtiene la hora actual
                 enviarDatosAMockAPI('Hora actual');
@@ -65,17 +53,17 @@ function startRecording() {
                 var utterance = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
                 synth.speak(utterance);
                 break;
-    case transcript.toLowerCase().includes('consultar clima'):
-        enviarDatosAMockAPI('Consultar clima');
-        var ciudad = prompt("Por favor, ingresa la ciudad para buscar el clima en Google:");
-        if (ciudad) {
-            var urlGoogleClima = 'https://www.google.com/search?q=clima+' + ciudad;
-            window.open(urlGoogleClima, '_blank');
-        } else {
-            alert("Debes ingresar una ciudad para buscar el clima.");
-        }
-        break;
-    default:
+            case transcript.toLowerCase().includes('consultar clima'):
+                enviarDatosAMockAPI('Consultar clima');
+                var ciudad = prompt("Por favor, ingresa la ciudad para buscar el clima en Google:");
+                if (ciudad) {
+                    var urlGoogleClima = 'https://www.google.com/search?q=clima+' + ciudad;
+                    window.open(urlGoogleClima, '_blank');
+                } else {
+                    alert("Debes ingresar una ciudad para buscar el clima.");
+                }
+                break;
+            default:
                 // Instrucción no reconocida
                 console.log('Instrucción no reconocida');
         }
@@ -86,12 +74,11 @@ function startRecording() {
     }
 
     recognition.start();
-}
-
-function stopRecording() {
-    document.getElementById('toggleRecordingBtn').innerText = "Empezar a Grabar";
-    document.getElementById('toggleRecordingBtn').classList.remove('btn-danger');
-    document.getElementById('toggleRecordingBtn').classList.add('btn-primary');
+    
+    // Reinicia la grabación cada 2 segundos
+    setInterval(function() {
+        recognition.start();
+    }, 2000);
 }
 
 function obtenerFechaHoraActual() {
