@@ -36,8 +36,8 @@ function startRecording() {
                 }
                 break;    
             case transcript.toLowerCase().includes('cierra esta ventana'):
+                enviarDatosAMockAPI('Cierra esta ventana');    
                 window.open('', '_self', '');
-                enviarDatosAMockAPI('Cierra esta ventana');
                 window.close();
                 break;
             case transcript.toLowerCase().includes('dime la hora actual'):
