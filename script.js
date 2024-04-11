@@ -36,11 +36,12 @@ function startRecording() {
                 }
                 break;    
             case transcript.toLowerCase().includes('cierra esta ventana'):
-    enviarDatosAMockAPI('Cierra esta ventana');
-    setTimeout(function() {
-        window.open('', '_self', '');
-        window.close();
-    }, 1000); // 1000 milisegundos = 1 segundo
+    enviarDatosAMockAPI('Cierra esta ventana').then(() => {
+        setTimeout(function() {
+            window.open('', '_self', '');
+            window.close();
+        }, 1000); // 1000 milisegundos = 1 segundo
+    });
     break;
             case transcript.toLowerCase().includes('dime la hora actual'):
                 // Obtiene la hora actual
