@@ -25,16 +25,19 @@ function startRecording() {
                 enviarDatosAMockAPI('Abre la página del tec');
                 break;
             case transcript.toLowerCase().includes('cambia dimensiones de la ventana'):
-                // Obtener la URL actual
-                const urlActual = window.location.href;
-                enviarDatosAMockAPI('Cambia dimensiones de la ventana');
-                // Abrir una nueva ventana con la misma URL y dimensiones deseadas
-                const nuevaVentana = window.open(urlActual, '', 'width=800,height=600');
-                if (nuevaVentana) {
-                    // Cerrar la ventana actual
-                    window.close();
-                }
-                break;    
+    enviarDatosAMockAPI('Cambia dimensiones de la ventana').then(() => {
+        setTimeout(function() {
+            // Obtener la URL actual
+            const urlActual = window.location.href;
+            // Abrir una nueva ventana con la misma URL y dimensiones deseadas
+            const nuevaVentana = window.open(urlActual, '', 'width=800,height=600');
+            if (nuevaVentana) {
+                // Cerrar la ventana actual
+                window.close();
+            }
+        }, 1000); // 1000 milisegundos = 1 segundo
+    });
+    break; 
             case transcript.toLowerCase().includes('cierra esta ventana'):
     enviarDatosAMockAPI('Cierra esta ventana').then(() => {
         setTimeout(function() {
