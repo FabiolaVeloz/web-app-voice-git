@@ -10,6 +10,10 @@ function startRecording() {
     recognition.onresult = function (event) {
         // Trae la información de todo lo que estuve hablando
         const transcript = event.results[0][0].transcript;
+
+        if (transcript.toLowerCase().includes('Fabiola')){
+
+        
         ordenIdentificadaDiv.innerText = "Orden Identificada: " + transcript;
 
         // Verificar diferentes instrucciones reconocidas por voz usando switch
@@ -25,8 +29,8 @@ function startRecording() {
                 enviarDatosAMockAPI('Abre la página del tec');
                 break;
             case transcript.toLowerCase().includes('cambia dimensiones de la ventana'):
-    enviarDatosAMockAPI('Cambia dimensiones de la ventana').then(() => {
-        setTimeout(function() {
+            enviarDatosAMockAPI('Cambia dimensiones de la ventana').then(() => {
+            setTimeout(function() {
             // Obtener la URL actual
             const urlActual = window.location.href;
             // Abrir una nueva ventana con la misma URL y dimensiones deseadas
@@ -85,6 +89,7 @@ function startRecording() {
     setInterval(function() {
         recognition.start();
     }, 2000);
+}
 }
 
 function obtenerFechaHoraActual() {
