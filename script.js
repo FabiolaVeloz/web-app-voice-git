@@ -1,19 +1,19 @@
 window.innerWidth = 800;
 window.innerHeight = 600;
 
-startRecording(); // Comienza la grabación inicialmente
+let recognition; // Variable para almacenar el objeto de reconocimiento de voz
+let restartInterval; 
 
 function startRecording() {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
     recognition.lang = 'es-ES';
-    const ordenIdentificadaDiv = document.getElementById('orden-identificada');
+    const ordenIdentificada = document.getElementById('ordenIdentificada');
     recognition.onresult = function (event) {
         // Trae la información de todo lo que estuve hablando
         const transcript = event.results[0][0].transcript;
+        if (transcript.toLowerCase().includes('comandos')) {
 
-        if (transcript.toLowerCase().includes('fabiola')) {
-
-            ordenIdentificadaDiv.innerText = "Orden Identificada: " + transcript;
+            ordenIdentificada.textContent = "Orden Identificada: " + transcript;
 
             // Verificar diferentes instrucciones reconocidas por voz usando switch
             switch (true) {
@@ -85,10 +85,17 @@ function startRecording() {
 
     recognition.start();
 
-    // Reinicia la grabación cada 2 segundos
-    setInterval(function () {
+    // Reinicia la grabación cada 5 segundos
+    restartInterval = setInterval(function () {
         recognition.start();
     }, 2000);
+}
+
+function stopRecording() {
+    if (recognition) {
+        recognition.stop();
+        clearInterval(restartInterval); // Detiene el intervalo de reinicio
+    }
 }
 
 function obtenerFechaHoraActual() {
