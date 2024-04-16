@@ -11,7 +11,7 @@ function startRecording() {
         // Trae la información de todo lo que estuve hablando
         const transcript = event.results[0][0].transcript;
 
-        if (transcript.toLowerCase().includes('Fabiola')) {
+        if (transcript.toLowerCase().includes('fabiola')) {
 
             ordenIdentificadaDiv.innerText = "Orden Identificada: " + transcript;
 
