@@ -1,5 +1,6 @@
 let ultimoDatoAnterior = null; // Variable para almacenar el último dato anterior
 setInterval(recibirDatos, 2000);
+ventanaAbierta = false;
 
 async function recibirDatos() {
     try {
