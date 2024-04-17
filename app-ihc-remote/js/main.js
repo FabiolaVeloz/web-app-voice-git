@@ -1,4 +1,5 @@
 let ultimoDatoAnterior = null; // Variable para almacenar el último dato anterior
+setInterval(recibirDatos, 2000);
 
 async function recibirDatos() {
     try {
@@ -99,4 +100,4 @@ function manejarAccion(ultimoDato) {
     }
 }
 
-setInterval(recibirDatos, 2000);
+
