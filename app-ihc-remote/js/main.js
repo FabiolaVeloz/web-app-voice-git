@@ -59,20 +59,25 @@ function manejarAccion(ultimoDato) {
             // Abre la página del tec en una nueva ventana
             window.open('https://www.tecnm.mx/', '_blank');
             break;
-            case 'cambia dimensiones de la ventana':
-                const urlActual = window.location.href;
+        case 'cambia dimensiones de la ventana':
+            const urlActual = window.location.href;
+            // Verifica si ya se abrió una ventana en esta iteración
+            if (!ventanaAbierta) {
                 // Abrir una nueva ventana con la misma URL y dimensiones deseadas
                 const nuevaVentana = window.open(urlActual, '', 'width=800,height=600');
                 if (nuevaVentana) {
+                    // Marcar que se ha abierto una ventana
+                    ventanaAbierta = true;
                     // Cerrar la ventana actual
                     window.close();
                 }
-                break;
-            case 'cierra esta ventana':
-                // Cierra la ventana actual
-                window.open('', '_self', '');
-                window.close();
-                break;
+            }
+            break;
+        case 'cierra esta ventana':
+            // Cierra la ventana actual
+            window.open('', '_self', '');
+            window.close();
+            break;
         case 'hora actual':
             // Obtiene la hora actual
             var fecha = new Date();
