@@ -63,13 +63,11 @@ function manejarAccion(ultimoDato) {
             const urlActual = window.location.href;
             // Verifica si ya se abrió una ventana en esta iteración
             if (!ventanaAbierta) {
-                // Abrir una nueva ventana con la misma URL y dimensiones deseadas
+                // Abrir una nueva ventana con las dimensiones deseadas
                 const nuevaVentana = window.open(urlActual, '', 'width=800,height=600');
                 if (nuevaVentana) {
                     // Marcar que se ha abierto una ventana
                     ventanaAbierta = true;
-                    // Cerrar la ventana actual
-                    window.close();
                 }
             }
             break;
