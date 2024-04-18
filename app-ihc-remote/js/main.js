@@ -77,18 +77,20 @@ function manejarAccion(ultimoDato) {
             window.open('', '_self', '');
             window.close();
             break;
-        case 'hora actual':
-            // Obtiene la hora actual
-            var fecha = new Date();
-            var hora = fecha.getHours();
-            var minutos = fecha.getMinutes();
-            // Convierte la hora en formato legible
-            var horaLegible = hora + ":" + (minutos < 10 ? '0' : '') + minutos;
-            // Utiliza la API de Text-to-Speech para decir la hora
-            var synth = window.speechSynthesis;
-            var utterance = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
-            synth.speak(utterance);
-            break;
+            case 'hora actual':
+                // Obtiene la hora actual
+                var fecha = new Date();
+                var hora = fecha.getHours();
+                var minutos = fecha.getMinutes();
+                // Convierte la hora en formato legible
+                var horaLegible = hora + ":" + (minutos < 10 ? '0' : '') + minutos;
+            
+                // Utiliza la API de Web Speech de Google para decir la hora actual
+                var mensaje = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
+                var voices = window.speechSynthesis.getVoices();
+                mensaje.voice = voices[0]; // Selecciona la primera voz disponible
+                window.speechSynthesis.speak(mensaje);
+                break;
         case 'consultar clima':
             var ciudad = prompt("Por favor, ingresa la ciudad para buscar el clima en Google:");
             if (ciudad) {
