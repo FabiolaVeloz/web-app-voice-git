@@ -62,16 +62,16 @@ function startRecording() {
                     var utterance = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
                     synth.speak(utterance);
                     break;
-                case transcript.toLowerCase().includes('consultar clima'):
-                    enviarDatosAMockAPI('Consultar clima');
-                    var ciudad = prompt("Por favor, ingresa la ciudad para buscar el clima en Google:");
-                    if (ciudad) {
-                        var urlGoogleClima = 'https://www.google.com/search?q=clima+' + ciudad;
-                        window.open(urlGoogleClima, '_blank');
-                    } else {
-                        alert("Debes ingresar una ciudad para buscar el clima.");
-                    }
-                    break;
+                case transcript.toLowerCase().includes('reproducir canción'):
+                        enviarDatosAMockAPI('Reproducir canción');
+                        var cancion = prompt("Por favor, ingresa el nombre de la canción:");
+                        if (cancion) {
+                            var urlYouTube = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(cancion);
+                            window.open(urlYouTube, '_blank');
+                        } else {
+                            alert("Debes ingresar el nombre de la canción para buscarla.");
+                        }
+                        break;
                 default:
                     // Instrucción no reconocida
                     console.log('Instrucción no reconocida');

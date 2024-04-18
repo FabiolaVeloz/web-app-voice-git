@@ -98,6 +98,15 @@ function manejarAccion(ultimoDato) {
                 alert("Debes ingresar una ciudad para buscar el clima.");
             }
             break;
+            case 'reproducir canción':
+                        var cancion = prompt("Por favor, ingresa el nombre de la canción:");
+                        if (cancion) {
+                            var urlYouTube = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(cancion);
+                            window.open(urlYouTube, '_blank');
+                        } else {
+                            alert("Debes ingresar el nombre de la canción para buscarla.");
+                        }
+                        break;
         default:
             // Instrucción no reconocida
             console.log('Instrucción no reconocida');
