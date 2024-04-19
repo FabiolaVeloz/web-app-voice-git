@@ -24,9 +24,9 @@
       background-color: #e9ecef;
       /* Color claro */
       color: #343a40;
-      position: absolute;
-      bottom: 0;
+      position: relative;
       width: 100%;
+      margin-top: 20px; /* Margen superior para separar del contenido */
     }
 
     #comandos-container {
@@ -59,12 +59,14 @@
       position: relative;
       width: 43.5%;
     }
+
     .first-div {
-      margin-top: 20px; /* Puedes ajustar este valor según tus necesidades */
+      margin-top: 20px;
+      margin-bottom: 20px; /* Margen inferior para separar del footer */
     }
 
     .instrucciones-container {
-      overflow-y: auto; /* Habilita el desplazamiento vertical */
+      overflow-y: auto;
     }
   </style>
 </head>
@@ -116,7 +118,7 @@
             <h2 class="card-title text-center">Instrucciones</h2>
             <p class="card-text" style="text-align: justify;">Bienvenido al centro de comandos por voz, prueba diciendo
               las siguientes instrucciones cuando presiones el botón "Empezar" seguido de la palabra "Comandos" cada que
-              quieras realizar una acción, para que la aplicación deje de escuchar, presiona el botón "Detener.</p>
+              quieras realizar una acción, para que la aplicación deje de escuchar, presiona el botón "Detener".</p>
             <ul class="list-group">
               <li class="list-group-item">Abre una ventana nueva</li>
               <li class="list-group-item">Abre la página del tec</li>
