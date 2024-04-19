@@ -5,6 +5,9 @@ let recognition; // Variable para almacenar el objeto de reconocimiento de voz
 let restartInterval; 
 
 function startRecording() {
+    document.getElementById('microfono-image').src = 'microfono-encendido.png';
+    document.getElementById('microfono-image').style.animation = 'encender 1.3s ease-in-out infinite alternate';
+
     recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
     recognition.lang = 'es-ES';
     const ordenIdentificada = document.getElementById('ordenIdentificada');
@@ -103,6 +106,9 @@ function startRecording() {
 
 function stopRecording() {
     if (recognition) {
+        document.getElementById('microfono-image').src = 'microfono-apagado.png';
+        document.getElementById('microfono-image').style.animation = 'none';
+        ordenIdentificada.textContent = "Orden Identificada: ";
         recognition.stop();
         clearInterval(restartInterval); // Detiene el intervalo de reinicio
     }
