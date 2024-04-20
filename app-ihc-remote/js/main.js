@@ -80,16 +80,11 @@ function manejarAccion(ultimoDato) {
             break;
         case 'hora actual':
             document.getElementById('microfono-image').src = 'reloj.png';
-            var fecha = new Date();
-                    var hora = fecha.getHours();
-                    var minutos = fecha.getMinutes();
-                    // Convierte la hora en formato legible
-                    var horaLegible = hora + ":" + (minutos < 10 ? '0' : '') + minutos;
-                    // Utiliza la API de Text-to-Speech para decir la hora
-                    var synth = window.speechSynthesis;
-                    var utterance = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
-                    synth.speak(utterance);
-                    break;
+                // Preguntar al usuario si desea escuchar la hora actual
+                if (confirm("¿Deseas que se diga la hora actual?")) {
+                    decirHoraActual();
+                }
+                break;
         case 'consultar clima':
             document.getElementById('microfono-image').src = 'clima.png';
             var ciudad = prompt("Por favor, ingresa la ciudad para buscar el clima en Google:");
@@ -114,6 +109,18 @@ function manejarAccion(ultimoDato) {
             // Instrucción no reconocida
             console.log('Instrucción no reconocida');
     }
+}
+
+function decirHoraActual() {
+    var fecha = new Date();
+    var hora = fecha.getHours();
+    var minutos = fecha.getMinutes();
+    // Convierte la hora en formato legible
+    var horaLegible = hora + ":" + (minutos < 10 ? '0' : '') + minutos;
+    // Utiliza la API de Text-to-Speech para decir la hora
+    var synth = window.speechSynthesis;
+    var utterance = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
+    synth.speak(utterance);
 }
 
 
