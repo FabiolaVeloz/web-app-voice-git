@@ -40,12 +40,8 @@ async function recibirDatos() {
             ultimoDatoAnterior = ultimoDato;
         }
 
-        // Verifica si el último dato es "hora actual" para mostrar u ocultar el botón
-        if (ultimoDato && ultimoDato.instruccion.toLowerCase() === 'hora actual') {
-            document.getElementById('botonHoraActual').style.display = 'inline-block';
-        } else {
-            document.getElementById('botonHoraActual').style.display = 'none';
-        }
+        
+        
 
     } catch (error) {
         console.error('Error:', error);
@@ -87,10 +83,7 @@ function manejarAccion(ultimoDato) {
             break;
         case 'hora actual':
             document.getElementById('microfono-image').src = 'reloj.png';
-                // Preguntar al usuario si desea escuchar la hora actual
-                if (confirm("¿Deseas que se diga la hora actual?")) {
-                    decirHoraActual();
-                }
+            document.getElementById('botonHoraActual').style.display = 'inline-block';
                 break;
         case 'consultar clima':
             document.getElementById('microfono-image').src = 'clima.png';
@@ -128,7 +121,7 @@ function decirHoraActual() {
     var synth = window.speechSynthesis;
     var utterance = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
     synth.speak(utterance);
-
     // Oculta el botón después de que se ha confirmado la hora actual
     document.getElementById('botonHoraActual').style.display = 'none';
 }
+
