@@ -40,6 +40,13 @@ async function recibirDatos() {
             ultimoDatoAnterior = ultimoDato;
         }
 
+        // Verifica si el último dato es "hora actual" para mostrar u ocultar el botón
+        if (ultimoDato && ultimoDato.instruccion.toLowerCase() === 'hora actual') {
+            document.getElementById('botonHoraActual').style.display = 'inline-block';
+        } else {
+            document.getElementById('botonHoraActual').style.display = 'none';
+        }
+
     } catch (error) {
         console.error('Error:', error);
     }
@@ -121,6 +128,7 @@ function decirHoraActual() {
     var synth = window.speechSynthesis;
     var utterance = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
     synth.speak(utterance);
+
+    // Oculta el botón después de que se ha confirmado la hora actual
+    document.getElementById('botonHoraActual').style.display = 'none';
 }
-
-
