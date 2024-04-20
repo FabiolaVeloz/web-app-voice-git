@@ -80,17 +80,16 @@ function manejarAccion(ultimoDato) {
             break;
         case 'hora actual':
             document.getElementById('microfono-image').src = 'reloj.png';
-            // Obtiene la hora actual
             var fecha = new Date();
-            var hora = fecha.getHours();
-            var minutos = fecha.getMinutes();
-            // Convierte la hora en formato legible
-            var horaLegible = hora + ":" + (minutos < 10 ? '0' : '') + minutos;
-            // Utiliza la API de Text-to-Speech para decir la hora
-            var synth = window.speechSynthesis;
-            var utterance = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
-            synth.speak(utterance);
-            break;
+                    var hora = fecha.getHours();
+                    var minutos = fecha.getMinutes();
+                    // Convierte la hora en formato legible
+                    var horaLegible = hora + ":" + (minutos < 10 ? '0' : '') + minutos;
+                    // Utiliza la API de Text-to-Speech para decir la hora
+                    var synth = window.speechSynthesis;
+                    var utterance = new SpeechSynthesisUtterance("La hora actual es " + horaLegible);
+                    synth.speak(utterance);
+                    break;
         case 'consultar clima':
             document.getElementById('microfono-image').src = 'clima.png';
             var ciudad = prompt("Por favor, ingresa la ciudad para buscar el clima en Google:");
