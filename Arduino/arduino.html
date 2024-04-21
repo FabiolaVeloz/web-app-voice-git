@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Último Registro de API</title>
+</head>
+<body>
+  
+  <div id="resultado"></div>
+
+  <script>
+    // Definir una función para obtener y mostrar el último registro
+    function obtenerUltimoRegistro() {
+      fetch('https://6624267404457d4aaf9bbc2d.mockapi.io/comandos')
+        .then(response => response.json())
+        .then(data => {
+          // Ordenar los datos por ID de manera descendente para obtener el último registro
+          data.sort((a, b) => b.id - a.id);
+
+          // Obtener el último registro
+          const ultimoRegistro = data[0];
+
+          // Mostrar el último registro en el HTML
+          const resultadoDiv = document.getElementById('resultado');
+          resultadoDiv.innerHTML = `
+            <p>${ultimoRegistro.instruccion}</p>
+          `;
+        })
+        .catch(error => {
+          console.error('Hubo un problema al obtener los datos:', error);
+        });
+    }
+
+    // Llamar a la función cada dos segundos
+    setInterval(obtenerUltimoRegistro, 2000);
+  </script>
+
+</body>
+</html>
