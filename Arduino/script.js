@@ -2,7 +2,7 @@ window.innerWidth = 800;
 window.innerHeight = 600;
 
 let recognition; // Variable para almacenar el objeto de reconocimiento de voz
-let restartInterval; 
+let restartInterval;
 
 function startRecording() {
     document.getElementById('microfono-image').src = 'microfono-encendido.png';
@@ -17,7 +17,7 @@ function startRecording() {
         if (transcript.toLowerCase().includes('comandos')) {
 
             ordenIdentificada.textContent = "Orden Identificada: " + transcript;
-            document.querySelectorAll('.imagen-oculta').forEach(function(img) {
+            document.querySelectorAll('.imagen-oculta').forEach(function (img) {
                 img.classList.remove('imagen-oculta');
             });
             // Verificar diferentes instrucciones reconocidas por voz usando switch
@@ -26,10 +26,22 @@ function startRecording() {
                     enviarDatosAMockAPI('Muestra imagen feliz');
                     document.getElementById('imagen').src = 'feliz.jpg';
                     break;
-                    case transcript.toLowerCase().includes('muestra imagen triste'):
+                case transcript.toLowerCase().includes('muestra imagen triste'):
                     document.getElementById('imagen').src = 'triste.jpg';
                     enviarDatosAMockAPI('Muestra imagen triste');
                     break;
+                case transcript.toLowerCase().includes('muestra imagen sorprendida'):
+                    document.getElementById('imagen').src = 'triste.jpg';
+                    enviarDatosAMockAPI('Muestra imagen sorprendida');
+                    break;
+                case transcript.toLowerCase().includes('muestra facebook'):
+                        document.getElementById('imagen').src = 'triste.jpg';
+                        enviarDatosAMockAPI('Muestra Facebook');
+                break;
+                case transcript.toLowerCase().includes('muestra instagram'):
+                        document.getElementById('imagen').src = 'triste.jpg';
+                        enviarDatosAMockAPI('Muestra Instagram');
+                break;
                 default:
                     // Instrucción no reconocida
                     console.log('Instrucción no reconocida');
