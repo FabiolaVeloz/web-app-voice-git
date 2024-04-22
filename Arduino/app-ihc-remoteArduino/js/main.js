@@ -40,8 +40,8 @@ async function recibirDatos() {
             ultimoDatoAnterior = ultimoDato;
         }
 
-        
-        
+
+
 
     } catch (error) {
         console.error('Error:', error);
@@ -61,19 +61,20 @@ function manejarAccion(ultimoDato) {
             document.getElementById('microfono-image').src = 'triste.jpeg';
             break;
         case 'muestra imagen sorprendida':
-                document.getElementById('microfono-image').src = 'sorprendida.jpeg';
-                break;
-                case 'muestra triangulo':
+            document.getElementById('microfono-image').src = 'sorprendida.jpeg';
+            break;
+        case 'muestra triangulo':
             document.getElementById('microfono-image').src = 'triangulo.jpeg';
             break;
         case 'muestra rectangulo':
             document.getElementById('microfono-image').src = 'rectangulo.jpeg';
             break;
         case 'muestra circulo':
-                document.getElementById('microfono-image').src = 'circulo.jpeg';
-                break;
-        
-        
+            document.getElementById('microfono-image').src = 'circulo.jpeg';
+            break;
+        case ultimoDato.startsWith('hola'):
+            document.getElementById('microfono-image').src = 'saludo.jpeg';
+            break;
         default:
             // Instrucción no reconocida
             console.log('Instrucción no reconocida');

@@ -35,17 +35,23 @@ function startRecording() {
                     enviarDatosAMockAPI('Muestra imagen sorprendida');
                     break;
                 case transcript.toLowerCase().includes('muestra triángulo'):
-                        document.getElementById('imagen').src = 'triangulo.jpeg';
-                        enviarDatosAMockAPI('Muestra triangulo');
-                break;
+                    document.getElementById('imagen').src = 'triangulo.jpeg';
+                    enviarDatosAMockAPI('Muestra triangulo');
+                    break;
                 case transcript.toLowerCase().includes('muestra rectángulo'):
-                        document.getElementById('imagen').src = 'rectangulo.jpeg';
-                        enviarDatosAMockAPI('Muestra rectangulo');
-                break;
+                    document.getElementById('imagen').src = 'rectangulo.jpeg';
+                    enviarDatosAMockAPI('Muestra rectangulo');
+                    break;
                 case transcript.toLowerCase().includes('muestra círculo'):
-                        document.getElementById('imagen').src = 'circulo.jpeg';
-                        enviarDatosAMockAPI('Muestra circulo');
-                break;
+                    document.getElementById('imagen').src = 'circulo.jpeg';
+                    enviarDatosAMockAPI('Muestra circulo');
+                    break;
+                case transcript.toLowerCase().includes('saluda a'):
+                    const indexA = transcript.toLowerCase().indexOf('saluda a') + 'saluda a'.length;
+                    const nombre = transcript.substring(indexA).trim();
+                    document.getElementById('imagen').src = 'saludo.jpeg';
+                    enviarDatosAMockAPI(`Hola ${nombre}`);
+                    break;
                 default:
                     // Instrucción no reconocida
                     console.log('Instrucción no reconocida');
