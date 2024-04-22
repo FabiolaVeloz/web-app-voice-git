@@ -55,11 +55,24 @@ function esIgual(objA, objB) {
 function manejarAccion(ultimoDato) {
     switch (ultimoDato.instruccion.toLowerCase()) {
         case 'muestra imagen feliz':
-            document.getElementById('microfono-image').src = 'feliz.jpg';
+            document.getElementById('microfono-image').src = 'feliz.jpeg';
             break;
         case 'muestra imagen triste':
-            document.getElementById('microfono-image').src = 'triste.jpg';
+            document.getElementById('microfono-image').src = 'triste.jpeg';
             break;
+        case 'muestra imagen sorprendida':
+                document.getElementById('microfono-image').src = 'sorprendida.jpeg';
+                break;
+                case 'muestra triangulo':
+            document.getElementById('microfono-image').src = 'triangulo.jpeg';
+            break;
+        case 'muestra rectangulo':
+            document.getElementById('microfono-image').src = 'rectangulo.jpeg';
+            break;
+        case 'muestra circulo':
+                document.getElementById('microfono-image').src = 'circulo.jpeg';
+                break;
+        
         
         default:
             // Instrucción no reconocida

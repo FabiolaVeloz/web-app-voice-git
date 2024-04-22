@@ -24,23 +24,27 @@ function startRecording() {
             switch (true) {
                 case transcript.toLowerCase().includes('muestra imagen feliz'):
                     enviarDatosAMockAPI('Muestra imagen feliz');
-                    document.getElementById('imagen').src = 'feliz.jpg';
+                    document.getElementById('imagen').src = 'feliz.jpeg';
                     break;
                 case transcript.toLowerCase().includes('muestra imagen triste'):
-                    document.getElementById('imagen').src = 'triste.jpg';
+                    document.getElementById('imagen').src = 'triste.jpeg';
                     enviarDatosAMockAPI('Muestra imagen triste');
                     break;
                 case transcript.toLowerCase().includes('muestra imagen sorprendida'):
-                    document.getElementById('imagen').src = 'triste.jpg';
+                    document.getElementById('imagen').src = 'sorprendida.jpeg';
                     enviarDatosAMockAPI('Muestra imagen sorprendida');
                     break;
-                case transcript.toLowerCase().includes('muestra facebook'):
-                        document.getElementById('imagen').src = 'triste.jpg';
-                        enviarDatosAMockAPI('Muestra Facebook');
+                case transcript.toLowerCase().includes('muestra triángulo'):
+                        document.getElementById('imagen').src = 'triangulo.jpeg';
+                        enviarDatosAMockAPI('Muestra triangulo');
                 break;
-                case transcript.toLowerCase().includes('muestra instagram'):
-                        document.getElementById('imagen').src = 'triste.jpg';
-                        enviarDatosAMockAPI('Muestra Instagram');
+                case transcript.toLowerCase().includes('muestra rectángulo'):
+                        document.getElementById('imagen').src = 'rectangulo.jpeg';
+                        enviarDatosAMockAPI('Muestra rectangulo');
+                break;
+                case transcript.toLowerCase().includes('muestra círculo'):
+                        document.getElementById('imagen').src = 'circulo.jpeg';
+                        enviarDatosAMockAPI('Muestra circulo');
                 break;
                 default:
                     // Instrucción no reconocida
